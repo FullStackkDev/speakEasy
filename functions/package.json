@@ -5,7 +5,7 @@
     "serve": "npm run build && firebase --project=shopgrid-0 emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "local": "./deploy-local.sh",
+    "local": "deploy-local.sh",
     "deploy:staging": "./deploy-staging.sh",
     "deploy:prod": "./deploy-prod.sh",
     "deploy": "firebase deploy --only functions",
