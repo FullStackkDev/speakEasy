@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import { intergateBytesPro } from "./bytesPro/integration";
+import { save } from "./user/save";
 
 export const api = functions
   .runWith({ timeoutSeconds: 540, memory: '1GB' })
@@ -15,8 +15,4 @@ export const reviewOnCreate = functions.firestore.document('reviews/{reviewId}')
   await (await import('./services/db/reviewOnCreate')).default(snap, context);
 });
 
-// export const bytesProIntegration = functions.https.onRequest(async (request, response) => {
-//   await (await import('./bytesPro/integration')).default(request, response);
-// });
-
-export const bytesProIntegration = functions.https.onRequest(intergateBytesPro);
+export const saveUser = functions.https.onRequest(save);

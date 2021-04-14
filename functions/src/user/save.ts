@@ -6,29 +6,25 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-export async function intergateBytesPro (request: functions.https.Request ,response: express.Response){
+export async function save (request: functions.https.Request ,response: express.Response){
 
     cors(request,response, async () => {
         try { 
             const data = JSON.parse(request.body);
-            console.log(data.name);   
             const obj = {
-                name: data.name,
+                name: data.name ,
                 type: data.type,
-                profile_pic: data.profile_pic,
-                bio:data.bio
+                profile_pic: data.profile_pic ,
+                bio:data.bio,
+                doc_id:db.collection("users").doc().id
             }
-            await db.collection('users')
-            .doc('1')
-            .set(obj);
+            await db.collection("users").doc(obj.doc_id).set(obj, { merge: false });
             response.status(200).send({
                 success: true,
-                message: 'This is test response',
+                message: 'Member added successfully',
                 data:[]
               });
         } catch (error) {
-            console.log(error);
-            // console.log('error while running my first functions');
             response.status(200).send({
                 message: 'error while running my first functions',
                 error: error
